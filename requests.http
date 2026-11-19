@@ -1,0 +1,45 @@
+### 1. List Users (Paginated & Sorted) 
+GET http://localhost:8080/api/users?page=0&size=5&sortBy=id&sortDir=asc 
+Accept: application/json 
+### 2. Search Users by Keyword 
+GET http://localhost:8080/api/users/search?keyword=john 
+Accept: application/json 
+### 3. Get User by ID 
+GET http://localhost:8080/api/users/1 
+Accept: application/json 
+### 4. Create New User (Valid Request) 
+POST http://localhost:8080/api/users 
+Content-Type: application/json 
+{ 
+} 
+  "firstName": "Michael", 
+  "lastName": "Scott", 
+  "email": "michael.scott@dundermifflin.com", 
+  "username": "mscott", 
+  "phone": "+15551234567", 
+  "role": "MANAGER", 
+  "active": true 
+### 5. Create User (Invalid - Triggers 400 Bad Request) 
+POST http://localhost:8080/api/users 
+Content-Type: application/json 
+{ 
+} 
+  "firstName": "", 
+  "lastName": "", 
+  "email": "not-an-email", 
+  "username": "ab", 
+  "role": null 
+### 6. Update User Details 
+PUT http://localhost:8080/api/users/1 
+Content-Type: application/json 
+{ 
+} 
+  "firstName": "John", 
+  "lastName": "Doe Updated", 
+  "email": "john.doe@example.com", 
+  "username": "johndoe", 
+  "phone": "+1234567890", 
+  "role": "ADMIN", 
+  "active": true 
+### 7. Soft Delete User 
+DELETE http://localhost:8080/api/users/1 
