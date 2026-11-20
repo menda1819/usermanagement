@@ -65,13 +65,13 @@ public class UserServiceImpl implements UserService {
         existing.setActive(dto.isActive()); 
         return toDto(userRepository.save(existing)); 
     }
-    @Override 
+        @Override 
     public void deleteUser(Long id) { 
         if (!userRepository.existsById(id)) { 
             throw new ResourceNotFoundException("Cannot delete. User not found with id: " + id); 
         } 
-        // Soft delete executed via Spring JdbcTemplate 
-        userJdbcRepository.softDeleteById(id); 
+        // Permanently delete user from MS SQL Server database
+        userRepository.deleteById(id); 
     }
     @Override 
     @Transactional(readOnly = true) 
