@@ -145,21 +145,43 @@ classDiagram
 
 ## 🗄 Entity-Relationship (ER) Diagram
 
+
 ```mermaid
 erDiagram
+    ROLE ||--o{ USERS : "assigned to"
+    
+    ROLE {
+        string role_name PK "ADMIN, MANAGER, USER"
+    }
+
     USERS {
         bigint id PK "IDENTITY(1,1)"
-        nvarchar(50) first_name "NOT NULL"
-        nvarchar(50) last_name "NOT NULL"
-        nvarchar(100) email "NOT NULL, UNIQUE"
-        nvarchar(100) username "NOT NULL, UNIQUE"
-        nvarchar(20) phone "NULL"
-        nvarchar(20) role "NOT NULL, CHECK (ADMIN, MANAGER, USER)"
-        bit active "NOT NULL, DEFAULT 1"
-        datetime2 created_at "NOT NULL, DEFAULT SYSUTCDATETIME()"
-        datetime2 updated_at "NOT NULL, DEFAULT SYSUTCDATETIME()"
+        string first_name "NOT NULL (Max: 50)"
+        string last_name "NOT NULL (Max: 50)"
+        string email UK "NOT NULL, UNIQUE (Max: 100)"
+        string username UK "NOT NULL, UNIQUE (Max: 100)"
+        string phone "NULLABLE (Max: 20)"
+        string role FK "CHECK (ADMIN, MANAGER, USER)"
+        boolean active "DEFAULT 1"
+        datetime2 created_at "DEFAULT SYSUTCDATETIME()"
+        datetime2 updated_at "DEFAULT SYSUTCDATETIME()"
     }
 ```
+
+### 📋 MS SQL Server 2022 Schema Reference (`dbo.users`)
+
+| Column Name | SQL Data Type | Nullable | Constraints & Defaults |
+|---|---|:---:|---|
+| `id` | `BIGINT` | ❌ No | **PRIMARY KEY**, `IDENTITY(1,1)` |
+| `first_name` | `NVARCHAR(50)` | ❌ No | None |
+| `last_name` | `NVARCHAR(50)` | ❌ No | None |
+| `email` | `NVARCHAR(100)` | ❌ No | **UNIQUE** (`uq_users_email`) |
+| `username` | `NVARCHAR(100)` | ❌ No | **UNIQUE** (`uq_users_username`) |
+| `phone` | `NVARCHAR(20)` | ✅ Yes | None |
+| `role` | `NVARCHAR(20)` | ❌ No | **CHECK** (`ADMIN`, `MANAGER`, `USER`) |
+| `active` | `BIT` | ❌ No | `DEFAULT 1` |
+| `created_at` | `DATETIME2` | ❌ No | `DEFAULT SYSUTCDATETIME()` |
+| `updated_at` | `DATETIME2` | ❌ No | `DEFAULT SYSUTCDATETIME()` |
 
 ---
 
