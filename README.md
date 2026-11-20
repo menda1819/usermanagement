@@ -260,6 +260,7 @@ spring.jpa.hibernate.ddl-auto=validate
 8. `feat: implement Thymeleaf web UI with Bootstrap 5 and delete confirmation modal`
 9. `test: add unit tests for user service and controller mock tests`
 10. `docs: add requests.http, architecture diagrams, and comprehensive README.md`
+11. `feat: enhance web UI styling and implement permanent user deletion`
 
 ---
 *Author: Imeth Mendis*
